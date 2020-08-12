@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
 
-import soft_renderer.functional as srf
+import thirdParty.SoftRas.soft_renderer.functional as srf
 
 
 class AmbientLighting(nn.Module):

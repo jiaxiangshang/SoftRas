@@ -4,7 +4,7 @@ import torch
 import numpy as np
 from skimage.io import imread
 
-import soft_renderer.cuda.load_textures as load_textures_cuda
+from thirdParty.SoftRas.soft_renderer.cuda.cuda_api import load_textures_cuda
 
 def load_mtl(filename_mtl):
     '''

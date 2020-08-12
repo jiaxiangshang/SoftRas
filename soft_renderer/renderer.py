@@ -6,7 +6,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy
 
-import soft_renderer as sr
+import thirdParty.SoftRas.soft_renderer as sr
 
 
 class Renderer(nn.Module):

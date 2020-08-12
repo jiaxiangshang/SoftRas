@@ -4,7 +4,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-import soft_renderer.functional as srf
+import thirdParty.SoftRas.soft_renderer.functional as srf
 
 class Projection(nn.Module):
     def __init__(self, P, dist_coeffs=None, orig_size=512):
@@ -95,6 +95,9 @@ class Transform(nn.Module):
         if self.camera_mode not in ['look', 'look_at']:
             raise ValueError('Projection does not need to set eyes')
         self.transformer._eye = srf.get_points_from_angles(distances, elevations, azimuths)
+
+    def set_transform_from_mtx(self, P, dist_coeffs, orig_size):
+        self.transformer = Projection(P, dist_coeffs, orig_size)
 
     def set_eyes(self, eyes):
         if self.camera_mode not in ['look', 'look_at']:

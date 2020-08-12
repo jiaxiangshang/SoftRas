@@ -3,8 +3,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Function
 
-import soft_renderer.cuda.voxelization as voxelization_cuda
-
+#import soft_renderer.cuda.voxelization as voxelization_cuda
+from thirdParty.SoftRas.soft_renderer.cuda.cuda_api import voxelization_cuda
 
 def voxelize_sub1(faces, size, dim):
     bs = faces.size(0)

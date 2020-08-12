@@ -3,7 +3,8 @@ import os
 import torch
 from skimage.io import imsave
 
-import soft_renderer.cuda.create_texture_image as create_texture_image_cuda
+#import soft_renderer.cuda.create_texture_image as create_texture_image_cuda
+from thirdParty.SoftRas.soft_renderer.cuda.cuda_api import create_texture_image_cuda
 
 
 def create_texture_image(textures, texture_res=16):

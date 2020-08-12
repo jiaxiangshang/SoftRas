@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-import soft_renderer.functional as srf
+import thirdParty.SoftRas.soft_renderer.functional as srf
 
 
 class SoftRasterizer(nn.Module):
