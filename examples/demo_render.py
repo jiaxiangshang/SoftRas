@@ -10,7 +10,7 @@ import numpy as np
 import imageio
 import argparse
 
-import soft_renderer as sr
+import thirdParty.SoftRas.soft_renderer as sr
 
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
@@ -19,14 +19,20 @@ data_dir = os.path.join(current_dir, '../data')
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-i', '--filename-input', type=str, 
-        default=os.path.join(data_dir, 'obj/spot/spot_triangulated.obj'))
-    parser.add_argument('-o', '--output-dir', type=str, 
-        default=os.path.join(data_dir, 'results/output_render'))
+    parser.add_argument('-i', '--filename-input', type=str, default=os.path.join(data_dir, '/data0/4_Exp/0_mdfsnet/4_fs_texture_obj_softRender/14_sadness.obj'))
+    parser.add_argument('-o', '--output-dir', type=str, default=os.path.join(data_dir,'/data0/4_Exp/0_mdfsnet/4_fs_texture_obj_softRender/softrender'))
+    # parser.add_argument('-i', '--filename-input', type=str,
+    #                     default=os.path.join(data_dir,'/data0/4_Exp/0_mdfsnet/5_fs_tu_obj_softRender/1_neutral.obj'))
+    # parser.add_argument('-o', '--output-dir', type=str,
+    #                     default=os.path.join(data_dir, '/data0/4_Exp/0_mdfsnet/5_fs_tu_obj_softRender/softrender'))
+
+
     args = parser.parse_args()
 
     # other settings
-    camera_distance = 2.732
+    # camera_distance = 220.732
+    # elevation = 30
+    camera_distance = 0.732
     elevation = 30
     azimuth = 0
 
@@ -35,12 +41,12 @@ def main():
                             load_texture=True, texture_res=5, texture_type='surface')
 
     # create renderer with SoftRas
-    renderer = sr.SoftRenderer(camera_mode='look_at')
+    renderer = sr.SoftRenderer(camera_mode='look_at', near=0.1, far=1000)
 
     os.makedirs(args.output_dir, exist_ok=True)
 
     # draw object from different view
-    loop = tqdm.tqdm(list(range(0, 360, 4)))
+    loop = tqdm.tqdm(list(range(0, 360, 6)))
     writer = imageio.get_writer(os.path.join(args.output_dir, 'rotation.gif'), mode='I')
     for num, azimuth in enumerate(loop):
         # rest mesh to initial state
@@ -53,7 +59,7 @@ def main():
     writer.close()
 
     # draw object from different sigma and gamma
-    loop = tqdm.tqdm(list(np.arange(-4, -2, 0.2)))
+    loop = tqdm.tqdm(list(np.arange(-4, -2, 0.02)))
     renderer.transform.set_eyes_from_angles(camera_distance, elevation, 45)
     writer = imageio.get_writer(os.path.join(args.output_dir, 'bluring.gif'), mode='I')
     for num, gamma_pow in enumerate(loop):

@@ -97,7 +97,23 @@ def load_textures(filename_obj, filename_mtl, texture_res):
         image = torch.from_numpy(image.copy()).cuda()
         is_update = (np.array(material_names) == material_name).astype(np.int32)
         is_update = torch.from_numpy(is_update).cuda()
+
+        # print(filename_texture)
+        # print(is_update)
+        # print(faces[50:150])
+        # print(image[50:150])
         textures = load_textures_cuda.load_textures(image, faces, textures, is_update)
+        #print(textures)
+        # with open('/data0/4_Exp/0_mdfsnet/obj_uv.txt', 'w') as f_debug:
+        #     is_update = is_update.cpu().detach().numpy()
+        #     faces = faces.cpu().detach().numpy()
+        #     image = image.cpu().detach().numpy()
+        #     textures = textures.cpu().detach().numpy()
+        #     for i in range(50, 100):
+        #         f_debug.write("ud %d, %f\n" % (i,is_update[i]))
+        #         f_debug.write("uv %d, %f, %f\n"%(i, faces[i][0][0], faces[i][0][1]))
+        #         f_debug.write("image %d, %f, %f, %f\n"%(i, image[i][100][0], image[i][100][1], image[i][100][2]))
+        #         f_debug.write("texture %d, %f, %f, %f"%(i, textures[i][0][0], textures[i][0][1], textures[i][0][2]))
     return textures
 
 

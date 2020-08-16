@@ -30,7 +30,7 @@ def projection(vertices, P, dist_coeffs, orig_size):
         x__ = x_
         y__ = y_
 
-    if orig_size is not int:
+    if orig_size is list:
         orig_size_w = orig_size[0]
         orig_size_h = orig_size[1]
         x__ = 2 * (x__ - orig_size_w / 2.) / orig_size_w
